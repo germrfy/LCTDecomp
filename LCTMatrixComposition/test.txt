@@ -1,0 +1,16 @@
+﻿ static void Main(string[] args)
+        {
+            var listStrings = new List<string>
+            {
+                "M","C","F"
+            };
+            var permutations = listStrings.Select(x => x.ToString());
+            int size = 5;
+            for (int i = 0; i < size - 1; i++)
+                permutations = permutations.SelectMany(x => listStrings, (x, y) => x + y);
+
+            //foreach (var item in permutations)
+            //    Console.WriteLine(item);
+            //permutations = permutations.Distinct();
+            Console.WriteLine(permutations.Count());
+        }
