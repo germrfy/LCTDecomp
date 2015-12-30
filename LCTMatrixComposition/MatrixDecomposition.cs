@@ -19,9 +19,11 @@ namespace LCTMatrixComposition
         public Matrix M5 { get; private set; }
         public Matrix Multiplication { get; private set; }
         public MathObject DeterminantMultiplication { get; private set; }
+        public string Permutation { get; private set; }
 
         public MatrixDecomposition(string permutation)
         {
+            Permutation = permutation;
             M1 = EstablishMatrixType(permutation[4]);
             M2 = EstablishMatrixType(permutation[3]);
             M3 = EstablishMatrixType(permutation[2]);
