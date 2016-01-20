@@ -25,7 +25,7 @@ namespace LCTMatrixComposition
 
             PrintPermutations(permutations);
             OutputToFile(decompositions);
-}
+        }
 
         private static IEnumerable<string> RemoveRedundantPermutations(IEnumerable<string> permutations)
         {

@@ -12,12 +12,12 @@ namespace LCTMatrixComposition
         private List<string> MagnificationSymbols = new List<string> { "M1", "M2", "M3", "M4", "M5" };
         private List<string> ChirpSymbols = new List<string> { "C1", "C2", "C3", "C4", "C5" };
 
-        public Matrix M1 { get; private set; }
-        public Matrix M2 { get; private set; }
-        public Matrix M3 { get; private set; }
-        public Matrix M4 { get; private set; }
-        public Matrix M5 { get; private set; }
-        public Matrix Multiplication { get; private set; }
+        public Matrix1D M1 { get; private set; }
+        public Matrix1D M2 { get; private set; }
+        public Matrix1D M3 { get; private set; }
+        public Matrix1D M4 { get; private set; }
+        public Matrix1D M5 { get; private set; }
+        public Matrix1D Multiplication { get; private set; }
         public MathObject DeterminantMultiplication { get; private set; }
         public string Permutation { get; private set; }
 
@@ -33,22 +33,22 @@ namespace LCTMatrixComposition
             DeterminantMultiplication = Multiplication.Determinant();
         }
 
-        private Matrix EstablishMatrixType(char type)
+        private Matrix1D EstablishMatrixType(char type)
         {
-            Matrix returnMatrix;
+            Matrix1D returnMatrix;
             if(type == 'M')
             {
-                returnMatrix = new Matrix(MatrixType.Magnification, MagnificationSymbols.First());
+                returnMatrix = new Matrix1D(MatrixType.Magnification, MagnificationSymbols.First());
                 MagnificationSymbols.Remove(MagnificationSymbols.First());
             }
             else if (type == 'C')
             {
-                returnMatrix = new Matrix(MatrixType.ChirpMultiplication, ChirpSymbols.First());
+                returnMatrix = new Matrix1D(MatrixType.ChirpMultiplication, ChirpSymbols.First());
                 ChirpSymbols.Remove(ChirpSymbols.First());
             }
             else
             {
-                returnMatrix = new Matrix(MatrixType.FourierTransform, string.Empty);
+                returnMatrix = new Matrix1D(MatrixType.FourierTransform, string.Empty);
             }
             return returnMatrix;
         }
