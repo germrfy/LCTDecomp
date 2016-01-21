@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>LCTMatrixComposition.Program2D</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Matrix.cs" />
+    <Compile Include="Matrix1D.cs" />
     <Compile Include="Matrix2D.cs" />
-    <Compile Include="MatrixDecomposition.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MatrixDecomposition1D.cs" />
+    <Compile Include="MatrixDecomposition2D.cs" />
+    <Compile Include="Program1D.cs" />
+    <Compile Include="Program2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

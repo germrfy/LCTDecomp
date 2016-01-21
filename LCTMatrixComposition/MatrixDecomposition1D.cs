@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LCTMatrixComposition
 {
-    public class MatrixDecomposition
+    public class MatrixDecomposition1D
     {
         private List<string> MagnificationSymbols = new List<string> { "M1", "M2", "M3", "M4", "M5" };
         private List<string> ChirpSymbols = new List<string> { "C1", "C2", "C3", "C4", "C5" };
@@ -21,7 +21,7 @@ namespace LCTMatrixComposition
         public MathObject DeterminantMultiplication { get; private set; }
         public string Permutation { get; private set; }
 
-        public MatrixDecomposition(string permutation)
+        public MatrixDecomposition1D(string permutation)
         {
             Permutation = permutation;
             M1 = EstablishMatrixType(permutation[4]);

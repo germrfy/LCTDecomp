@@ -66,7 +66,7 @@ namespace LCTMatrixComposition
         }
     }
 
-    public static class MatrixExtensions
+    public static class MatrixExtensions1D
     {
         public static Matrix1D Multiply(this Matrix1D m, Matrix1D matrix)
         {
@@ -86,7 +86,7 @@ namespace LCTMatrixComposition
         }
         public static Matrix1D Inverse(this Matrix1D m)
         {
-            return new Matrix1D(m.D / Determinant(m), -m.B / Determinant(m), -m.C / Determinant(m), m.A / Determinant(m));
+            return new Matrix1D(m.D / m.Determinant(), -m.B / m.Determinant(), -m.C / m.Determinant(), m.A / m.Determinant());
         }
         public static Matrix1D Add(this Matrix1D m, Matrix1D matrix)
         {

@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace LCTMatrixComposition
 {
-    class Program
+    class Program1D
     {
         private static List<string> availableMatrices = new List<string> { "M","C","F" };
         static void Main(string[] args)
         {
-            var spectralMethodDecomp = new MatrixDecomposition("CMFCF");
+            var spectralMethodDecomp = new MatrixDecomposition1D("CMFCF");
             var permutations = GenerateAllPermutations();
             permutations = RemoveRedundantPermutations(permutations);
-            var decompositions = new List<MatrixDecomposition>();
+            var decompositions = new List<MatrixDecomposition1D>();
             foreach (var p in permutations)
             {
-                decompositions.Add(new MatrixDecomposition(p));
+                decompositions.Add(new MatrixDecomposition1D(p));
             }
 
             PrintPermutations(permutations);
@@ -55,7 +55,7 @@ namespace LCTMatrixComposition
             Console.WriteLine(permutations.Count());
         }
 
-        private static void OutputToFile(List<MatrixDecomposition> decomp)
+        private static void OutputToFile(List<MatrixDecomposition1D> decomp)
         {
             string[] output = new string[6*decomp.Count()];
             var i = 0;
