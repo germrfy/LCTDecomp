@@ -10,9 +10,16 @@ namespace LCTMatrixComposition
         private static List<string> availableMatrices = new List<string> { "M", "C", "F" };
         static void Main(string[] args)
         {
-            var x = new Matrix2D(new Matrix1D(4, 5, 0, 3), new Matrix1D(1, 8, 6, 1), new Matrix1D(3, 5, 2, 4), new Matrix1D(0, 9, 6, 1));
-            var y = new Matrix2D(new Matrix1D(1, 5, 0, 3), new Matrix1D(1, 0, 6, 1), new Matrix1D(3, 5, 2, 0), new Matrix1D(7, 2, 6, 1));
-            var z = x.Multiply(y);
+            var permutations = GenerateAllPermutations();
+            permutations = RemoveRedundantPermutations(permutations);
+            var decompositions = new List<MatrixDecomposition2D>();
+            foreach (var p in permutations)
+            {
+                decompositions.Add(new MatrixDecomposition2D(p));
+            }
+
+            PrintPermutations(permutations);
+            OutputToFile(decompositions);
         }
 
         private static IEnumerable<string> RemoveRedundantPermutations(IEnumerable<string> permutations)
@@ -23,6 +30,7 @@ namespace LCTMatrixComposition
             permutations = permutations.Where(p => !p.Contains("MM"));  // Cannot contain two 'M' in row
             permutations = permutations.Where(p => !p.Contains("FFF")); //Cannot contain 3 or more C or F in a row
             permutations = permutations.Where(p => !p.Contains("CCC"));
+            permutations = permutations.Where(p => p.Count(c => c == 'M') == 1);  
             return permutations;
         }
 
@@ -43,19 +51,28 @@ namespace LCTMatrixComposition
             Console.WriteLine(permutations.Count());
         }
 
-        private static void OutputToFile(List<MatrixDecomposition1D> decomp)
+        private static void OutputToFile(List<MatrixDecomposition2D> decomp)
         {
-            string[] output = new string[6 * decomp.Count()];
+            string[] output = new string[15 * decomp.Count()];
             var i = 0;
             foreach (var m in decomp)
             {
                 output[i] = "\n [" + (decomp.IndexOf(m) + 1).ToString() + "]";
                 output[i + 1] = "****** '" + m.Permutation + "' ******";
-                output[i + 2] = "A = " + m.Multiplication.A.ToString() + "\t\t\t\t B = " + m.Multiplication.B.ToString();
-                output[i + 3] = "C = " + m.Multiplication.C.ToString() + "\t\t\t\t D = " + m.Multiplication.D.ToString();
-                output[i + 4] = "Det : " + m.Multiplication.Determinant().ToString();
+                output[i + 2] = "**********************************************************************";
+                output[i + 3] = "A11 = " + m.Multiplication.A.A.ToString() + "\t\t\t\t A12 = " + m.Multiplication.A.B.ToString();
+                output[i + 4] = "A21 = " + m.Multiplication.A.C.ToString() + "\t\t\t\t A22 = " + m.Multiplication.A.D.ToString();
                 output[i + 5] = "**********************************************************************";
-                i += 6;
+                output[i + 6] = "B11 = " + m.Multiplication.B.A.ToString() + "\t\t\t\t B12 = " + m.Multiplication.B.B.ToString();
+                output[i + 7] = "B21 = " + m.Multiplication.B.C.ToString() + "\t\t\t\t B22 = " + m.Multiplication.B.D.ToString();
+                output[i + 8] = "**********************************************************************";
+                output[i + 9] = "C11 = " + m.Multiplication.C.A.ToString() + "\t\t\t\t C12 = " + m.Multiplication.C.B.ToString();
+                output[i + 10] = "C21 = " + m.Multiplication.C.C.ToString() + "\t\t\t\t C22 = " + m.Multiplication.C.D.ToString();
+                output[i + 11] = "**********************************************************************";
+                output[i + 12] = "D11 = " + m.Multiplication.D.A.ToString() + "\t\t\t\t D12 = " + m.Multiplication.D.B.ToString();
+                output[i + 13] = "D21 = " + m.Multiplication.D.C.ToString() + "\t\t\t\t D22 = " + m.Multiplication.D.D.ToString();
+                output[i + 14] = "**********************************************************************";
+                i += 15;
             }
 
             using (StreamWriter file = new StreamWriter(@"C:\Users\Ger\Desktop\Output2DNSLCT.txt"))
@@ -65,6 +82,15 @@ namespace LCTMatrixComposition
                     file.WriteLine(ln);
                 }
             }
+        }
+
+        private static void TestFunction()
+        {
+            var x = new Matrix2D(new Matrix1D(4, 5, 0, 3), new Matrix1D(1, 8, 6, 1), new Matrix1D(3, 5, 2, 4), new Matrix1D(0, 9, 6, 1));
+            var y = new Matrix2D(new Matrix1D(1, 5, 0, 3), new Matrix1D(1, 0, 6, 1), new Matrix1D(3, 5, 2, 0), new Matrix1D(7, 2, 6, 1));
+            var z = x.Multiply(y);
+            var a = x.A.Transpose();
+            var b = x.A.Inverse();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace LCTMatrixComposition
     public class MatrixDecomposition2D
     {
         private List<string> MagnificationSymbols = new List<string> { "S1", "S2", "S3", "S4", "S5" };
-        private List<string> ChirpSymbols = new List<string> { "C1", "C2", "C3", "C4", "C5" };
+        private List<string> ChirpSymbols = new List<string> { "c1", "c2", "c3", "c4", "c5" };
         public Matrix2D M1 { get; private set; }
         public Matrix2D M2 { get; private set; }
         public Matrix2D M3 { get; private set; }
